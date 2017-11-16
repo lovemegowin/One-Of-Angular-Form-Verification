@@ -1,0 +1,89 @@
+<!--导航条-->
+<div class="bg-white bread-crumb">
+    <ul class="breadcrumb b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="app.dashboard"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active" ng-bind="title"></li>
+        <button class="btn btn-sm btn-icon btn-default pull-right" ng-click="$state.reload()"><i
+                class="icon icon-refresh"></i></button>
+    </ul>
+</div>
+<div class="wrapper-md">
+    <div class="panel-body">
+        <div class="main" >
+            <form name="myForm" class="form-horizontal form-validation" method="post" ng-submit="submitForm(myForm.$valid)" >
+                <div class="form-group" ng-class="{'has-success':myForm.oldPassword.$valid }">
+                    <label class="col-sm-2 control-label" id="jijiW"><span class="text-danger wrapper-sm">*</span>旧密码：</label>
+                    <br>&nbsp;
+                    <div class="col-sm-10">
+                        <input class="form-control"
+                               name="oldPassword"
+                               type="password"
+                               id="oldPassword"
+                               ng-model="data.oldPassword"
+                               placeholder="请输入旧密码"
+                               ng-pattern="/^(?![a-zA-z]+$)(?!\d+$)(?![ _`~!@#$%^&*()+=|{}':;',\\[\\].<>?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]+$)[a-zA-Z\d]{6,20}$/"
+                               required
+                               ng-minlength="6"
+                               ng-maxlength="20"
+                        />
+                        <br>
+                        <span class="has-error" ng-if="myForm.$dirty && myForm.name.$invalid">填写格式错误</span>
+                        <p class = "has-error" ng-if="myForm.oldPassword.$error.required&&myForm.oldPassword.$touched ">旧密码不能为空</p>
+                        <p class="has-error" ng-if="(myForm.oldPassword.$error.minlength||myForm.oldPassword.$error.maxlength)&&myForm.oldPassword.$touched">旧密码长度必须6-20位之间！</p>
+                        <p class="has-error" ng-if="myForm.oldPassword.$error.pattern&&myForm.oldPassword.$touched">密码不能为纯数字或者纯字母且不能包含特殊字符</p>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group" ng-class="{'has-success':myForm.newPassword.$valid }">
+                    <label class="col-sm-2 control-label" id="jijiE"><span class="text-danger wrapper-sm">*</span>新密码：</label>
+                    <br>&nbsp;
+                    <div class="col-sm-10">
+                        <input class="form-control"
+                               type="password"
+                               ng-model="data.newPassword"
+                               placeholder="请输入新密码"
+                               ng-pattern="/^(?![a-zA-z]+$)(?!\d+$)(?![ _`~!@#$%^&*()+=|{}':;',\\[\\].<>?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]+$)[a-zA-Z\d]{6,20}$/"
+                               required
+                               ng-minlength="6"
+                               ng-maxlength="20"
+                        />
+                        <br>
+                        <p ng-class = "has-error" ng-if="myForm.newPassword.$error.required&&myForm.newPassword.$touched ">密码不能为空！</p>
+                        <p ng-class="has-error" ng-if="(myForm.newPassword.$error.minlength||myForm.newPassword.$error.maxlength)&&myForm.newPassword.$touched">密码长度必须6-20位之间！</p>
+                        <p ng-class="has-error" ng-if="myForm.newPassword.$error.pattern&&myForm.newPassword.$touched">密码不能为纯数字或者纯字母且不能包含特殊字符</p>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group" ng-class="{'has-success':myForm.confirmPassword.$valid }">
+                    <label class="col-sm-2 control-label" id="jijiR"><span class="text-danger wrapper-sm">*</span>确认密码：</label>
+                    <br>&nbsp;
+                    <div class="col-sm-10">
+                        <input class="form-control"
+                               type="password"
+                               ng-model="confirmPassword"
+                               placeholder="请再次输入密码"
+                               ng-pattern="/^(?![a-zA-z]+$)(?!\d+$)(?![ _`~!@#$%^&*()+=|{}':;',\\[\\].<>?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]+$)[a-zA-Z\d]{6,20}$/"
+                               required
+                               ng-minlength="6"
+                               ng-maxlength="20"
+                               compare="data.newPassword"
+                        />
+                        <br>
+                        <p ng-class = "has-error" ng-if="myForm.confirmPassword.$error.required&&myForm.confirmPassword.$touched ">密码不能为空！</p>
+                        <p ng-class="has-error" ng-if="myForm.confirmPassword.$error.compare && myForm.confirmPassword.$touched ">
+                            两次输入的密码不一致！
+                        </p>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group" id="jijiQ">
+                    <div class="col-sm-offset-2 col-sm-4">
+                        <button class="btn btn-primary" type="submit" id="submit" ng-disabled="myForm.oldPassword.$invalid||myForm.newPassword.$invalid||myForm.confirmPassword.$invalid" ng-click="saveData()">提交</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-default" type="reset" id="reset"  >重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
